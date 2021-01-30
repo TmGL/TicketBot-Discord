@@ -11,13 +11,11 @@ module.exports = {
         await client.users.fetch(message.channel.topic).then(() => {
             if (message.channel.deletable) {
                 message.channel.send('This ticket will be deleted in 5 seconds.');
-            } else {
-                throw new Error('cmd.errors.DELETE: channel is not deletable');
+                setTimeout(() => {
+                    return message.channel.delete().catch(err => console.log(err));
+                }, 5000);
             }
-
-            setTimeout(() => {
-                message.channel.delete().catch(err => console.log(err));
-            }, 5000);
+            throw new Error('cmd.errors.DELETE: Channel is not deletable');
         }).catch(() => {
             message.reply('This is not a valid ticket channel!');
         });
