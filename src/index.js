@@ -11,7 +11,6 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', () => console.log(client.user.tag + ' is now ready!'));
-
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot || !message.guild) return;
 
